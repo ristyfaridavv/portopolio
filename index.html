@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate-key="pageTitle">Biodata Risti Nur Fadiyah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Nanum+Pen+Script&family=Noto+Sans+Javanese:wght@400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"></script>
+    <style>
+        /* Gaya dasar untuk tema buku dan alat tulis */
+        :root {
+            --paper-color: #f7f3e9;
+            --ink-color: #333;
+            --border-color: #d1c7bc;
+            --accent-color: #a0522d;
+            --glow-color: #ff9933;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: var(--border-color);
+            color: var(--ink-color);
+            margin: 0;
+            line-height: 1.6;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: var(--paper-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.15);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        h1, h2 {
+            font-family: 'Nanum Pen Script', cursive;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--ink-color);
+        }
+        
+        /* Gaya untuk Language Switcher */
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 10px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .section-content {
+            padding: 1rem 0;
+        }
+        
+        /* Efek hover untuk bagian-bagian */
+        .section-content:hover {
+            background-color: rgba(255, 255, 255, 0.5); 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .section-content p, .section-content ul, .section-content li {
+            font-family: 'Crimson Text', serif;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li:before {
+            content: '✒️';
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--accent-color);
+            color: var(--paper-color);
+        }
+
+        /* Gaya khusus untuk Aksara Jawa */
+        .aksara-jawa {
+            font-family: 'Noto Sans Javanese', serif;
+            font-size: 1.2rem;
+        }
+
+        /* Gaya untuk diagram */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 0 15px var(--glow-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .chart-container canvas {
+            background-color: transparent;
+        }
+
+        /* Gaya untuk tombol */
+        .btn-toggle {
+            display: block;
+            width: fit-content;
+            margin: 1.5rem auto 0;
+            padding: 10px 20px;
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            background-color: var(--accent-color);
+            color: var(--paper-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-toggle:hover {
+            background-color: #8c4728;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Gaya untuk tombol cetak */
+        .btn-print {
+            display: block;
+            margin: 2rem auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        /* Media Query untuk mode cetak */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+
+            .lang-switcher, .btn-toggle, .btn-print, .chart-container {
+                display: none;
+            }
+
+            h2 {
+                border-bottom: 1px solid #ddd;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px dashed var(--border-color);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Language Switcher -->
+        <select id="lang-switcher" class="lang-switcher">
+            <option value="id">Bahasa Indonesia</option>
+            <option value="en">English</option>
+            <option value="jv">Bahasa Jawa</option>
+            <option value="ar">Bahasa Arab</option>
+            <option value="ja">Aksara Jawa</option>
+        </select>
+
+        <!-- Header -->
+        <header class="header">
+            <img src="profil.jpg" alt="Avatar Risti Nur Fadiyah" class="profile-pic">
+            <h1 data-translate-key="name">Risti Nur Fadiyah</h1>
+            <p class="title" data-translate-key="studentStatus">Siswi SMK Ma'arif NU Tirto</p>
+        </header>
+
+        <!-- Biodata Diri -->
+        <section class="section-content">
+            <h2 data-translate-key="bioTitle">Biodata Diri</h2>
+            <p><strong data-translate-key="bioNameLabel">Nama</strong> : <span data-translate-key="bioName">Risti Nur Fadiyah</span></p>
+            <p><strong data-translate-key="bioDobLabel">Tempat, tanggal lahir</strong> : <span data-translate-key="bioDob">Pekalongan, 10 Agustus 2009</span></p>
+            <p><strong data-translate-key="bioAddressLabel">Alamat</strong> : <span data-translate-key="bioAddress">Desa BK, RT 04 RW 02, Bjng, Pekalongan</span></p>
+            <p><strong data-translate-key="bioGenderLabel">Jenis Kelamin</strong> : <span data-translate-key="bioGender">Perempuan</span></p>
+            <p><strong data-translate-key="bioReligionLabel">Agama</strong> : <span data-translate-key="bioReligion">Islam</span></p>
+            <p><strong data-translate-key="bioNationalityLabel">Kewarganegaraan</strong> : <span data-translate-key="bioNationality">Indonesia</span></p>
+            <p><strong data-translate-key="bioStatusLabel">Status</strong> : <span data-translate-key="bioStatus">Pelajar</span></p>
+            <p><strong data-translate-key="bioEmailLabel">Email</strong> : <span data-translate-key="bioEmail">ristyfar*****@gmail.com</span></p>
+            <p><strong data-translate-key="bioPhoneLabel">No. Telepon</strong> : <span data-translate-key="bioPhone">08222622****</span></p>
+        </section>
+
+        <!-- Pendidikan -->
+        <section class="section-content">
+            <h2 data-translate-key="educationTitle">Pendidikan</h2>
+            <ul>
+                <li data-translate-key="educationMI">MI ALHUDA Babalan Kidul (2015-2021)</li>
+                <li data-translate-key="educationSMP">SMPN 1 Kedungwuni (2021-2024)</li>
+                <li data-translate-key="educationSMK">SMK Ma'arif NU Tirto (2024)</li>
+            </ul>
+        </section>
+
+        <!-- Keterampilan -->
+        <section class="section-content">
+            <h2 data-translate-key="skillsTitle">Keterampilan</h2>
+            <ul>
+                <li data-translate-key="skillCanva">Memiliki kemampuan mendesain grafis dengan Canva</li>
+                <li data-translate-key="skillStressMngmt">Manajemen Emosi dan Stres</li>
+            </ul>
+        </section>
+        
+        <!-- Riwayat Hidup / Pengalaman -->
+        <section class="section-content">
+            <h2 data-translate-key="experienceTitle">Riwayat Hidup / Pengalaman</h2>
+            <ul>
+                <li data-translate-key="expOsis">Mengikuti Osis SMK</li>
+                <li data-translate-key="expStudytour">Mengikuti study tour ke Bandung saat kelas 8</li>
+            </ul>
+        </section>
+
+        <!-- Prestasi -->
+        <section class="section-content">
+            <h2 data-translate-key="achievementsTitle">Prestasi</h2>
+            <ul>
+                <li data-translate-key="achieveMTQ">Juara 1 Lomba MTQ (tilawah) tingkat kecamatan, 2025</li>
+                <li data-translate-key="achieveMI">Peringkat 3 saat MI Kelas 4</li>
+            </ul>
+        </section>
+        
+        <!-- Statistik Kegiatan Sehari-hari -->
+        <section class="section-content">
+            <h2 data-translate-key="dailyStatsTitle">Statistik Kegiatan Sehari-hari</h2>
+            <button class="btn-toggle" onclick="toggleChart('dailyChartContainer')"><span data-translate-key="showDailyStatsBtn">Tampilkan Statistik Kegiatan</span></button>
+            <div id="dailyChartContainer" class="chart-container" style="display: none;">
+                <canvas id="dailyActivityChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Hobi dan Minat -->
+        <section class="section-content">
+            <h2 data-translate-key="hobbiesTitle">Hobi dan Minat</h2>
+            <p data-translate-key="chartHobbyText">Pilih diagram untuk melihat presentase hobi:</p>
+            <button class="btn-toggle" onclick="toggleChart('hobbyChartContainer')"><span data-translate-key="showHobbyPieBtn">Tampilkan Diagram Hobi</span></button>
+            <div id="hobbyChartContainer" class="chart-container" style="display: none;">
+                <canvas id="hobbyChart"></canvas>
+            </div>
+            
+            <p data-translate-key="chartInterestText">Pilih diagram untuk melihat tingkat minat (skala 1-10):</p>
+            <button class="btn-toggle" onclick="toggleChart('interestChartContainer')"><span data-translate-key="showInterestRadarBtn">Tampilkan Tingkat Minat</span></button>
+            <div id="interestChartContainer" class="chart-container" style="display: none;">
+                <canvas id="interestChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Moto -->
+        <section class="section-content">
+            <h2 data-translate-key="mottoTitle">Moto</h2>
+            <p data-translate-key="mottoText">"Kebahagiaan ditemukan dalam perjalanan, bukan hanya pada tujuan"</p>
+        </section>
+        
+        <!-- Harapan Masa Depan -->
+        <section class="section-content">
+            <h2 data-translate-key="futureHopesTitle">Harapan Masa Depan</h2>
+            <p data-translate-key="futureHopesText">"Semoga masa depan membawa kedamaian dan kebahagiaan bagi semua orang."</p>
+            <p data-translate-key="futureHope">Saya bercita-cita menjadi seorang Dokter.</p>
+        </section>
+
+        <!-- Tabel Data -->
+        <section class="section-content">
+            <h2 data-translate-key="summaryTitle">Ringkasan Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-translate-key="tableDescHeader">Deskripsi</th>
+                        <th data-translate-key="tableValueHeader">Nilai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-translate-key="tablePopularHobbyLabel"><strong>Hobi Populer</strong></td>
+                        <td data-translate-key="tablePopularHobbyValue">Memasak (25%), Jalan-jalan (25%)</td>
+                    </tr>
+                    <tr>
+                        <td data-translate-key="tableHobbyModeLabel"><strong>Modus Hobi</strong></td>
+                        <td data-translate-key="tableHobbyModeValue">Memasak dan Jalan-jalan</td>
+                    </tr>
+                    <tr>
+                        <td data-translate-key="tableTotalAchieveLabel"><strong>Total Prestasi</strong></td>
+                        <td data-translate-key="tableTotalAchieveValue">2</td>
+                    </tr>
+                    <tr>
+                        <td data-translate-key="tableAcademicAchieveLabel"><strong>Prestasi Akademik</strong></td>
+                        <td data-translate-key="tableAcademicAchieveValue">1</td>
+                    </tr>
+                    <tr>
+                        <td data-translate-key="tableAcademicPercentLabel"><strong>Persentase Prestasi Akademik</strong></td>
+                        <td data-translate-key="tableAcademicPercentValue">50%</td>
+                    </tr>
+                    <tr>
+                        <td data-translate-key="tableAvgDailyLabel"><strong>Rata-rata Kegiatan per hari</strong></td>
+                        <td data-translate-key="tableAvgDailyValue">20.43 jam</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p data-translate-key="footerNote">"Belajar dari masa lalu, hiduplah untuk hari ini, dan biarkan dunia tahu siapa dirimu"</p>
+            <p>–Risti</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Objek data untuk terjemahan
+        const translations = {
+            id: {
+                pageTitle: "Biodata Risti Nur Fadiyah",
+                name: "Risti Nur Fadiyah",
+                studentStatus: "Siswi SMK Ma'arif NU Tirto",
+                bioTitle: "Biodata Diri",
+                bioNameLabel: "Nama",
+                bioName: "Risti Nur Fadiyah",
+                bioDobLabel: "Tempat, tanggal lahir",
+                bioDob: "Pekalongan, 10 Agustus 2009",
+                bioAddressLabel: "Alamat",
+                bioAddress: "Desa Babalan Kidul RT 04 RW 02, Bojong, Pekalongan",
+                bioGenderLabel: "Jenis Kelamin",
+                bioGender: "Perempuan",
+                bioReligionLabel: "Agama",
+                bioReligion: "Islam",
+                bioNationalityLabel: "Kewarganegaraan",
+                bioNationality: "Indonesia",
+                bioStatusLabel: "Status",
+                bioStatus: "Pelajar",
+                bioEmailLabel: "Email",
+                bioPhoneLabel: "No. Telepon",
+                educationTitle: "Pendidikan",
+                educationMI: "MI ALHUDA Babalan Kidul (2015-2021)",
+                educationSMP: "SMPN 1 Kedungwuni (2021-2024)",
+                educationSMK: "SMK Ma'arif NU Tirto (2024)",
+                skillsTitle: "Keterampilan",
+                skillCanva: "Memiliki kemampuan mendesain grafis dengan Canva",
+                skillStressMngmt: "Manajemen Emosi dan Stres",
+                experienceTitle: "Riwayat Hidup / Pengalaman",
+                expOsis: "Mengikuti Osis SMK",
+                expStudytour: "Mengikuti study tour ke Bandung saat kelas 8",
+                achievementsTitle: "Prestasi",
+                achieveMTQ: "Juara 1 Lomba MTQ (tilawah) tingkat kecamatan, 2025",
+                achieveMI: "Peringkat 3 saat MI Kelas 4",
+                dailyStatsTitle: "Statistik Kegiatan Sehari-hari",
+                showDailyStatsBtn: "Tampilkan Statistik Kegiatan",
+                dailyChartLabel: "Jam per Minggu",
+                dailyChartTitle: "Kegiatan Sehari-hari per Minggu",
+                hobbyChartTitle: "Persentase Hobi",
+                hobbiesTitle: "Hobi dan Minat",
+                chartHobbyText: "Pilih diagram untuk melihat presentase hobi:",
+                showHobbyPieBtn: "Tampilkan Diagram Hobi",
+                chartInterestText: "Pilih diagram untuk melihat tingkat minat (skala 1-10):",
+                showInterestRadarBtn: "Tampilkan Tingkat Minat",
+                mottoTitle: "Moto",
+                mottoText: "Kebahagiaan ditemukan dalam perjalanan, bukan hanya pada tujuan",
+                futureHopesTitle: "Harapan Masa Depan",
+                futureHopesText: "Semoga masa depan membawa kedamaian dan kebahagiaan bagi semua orang.",
+                // Data baru untuk cita-cita
+                futureHope: "Saya bercita-cita menjadi seorang Dokter.",
+                summaryTitle: "Ringkasan Data",
+                tableDescHeader: "Deskripsi",
+                tableValueHeader: "Nilai",
+                tablePopularHobbyLabel: "Hobi Populer",
+                tablePopularHobbyValue: "Memasak (25%), Jalan-jalan (25%)",
+                tableHobbyModeLabel: "Modus Hobi",
+                tableHobbyModeValue: "Memasak dan Jalan-jalan",
+                tableTotalAchieveLabel: "Total Prestasi",
+                tableTotalAchieveValue: "2",
+                tableAcademicAchieveLabel: "Prestasi Akademik",
+                tableAcademicAchieveValue: "1",
+                tableAcademicPercentLabel: "Presentase Prestasi Akademik",
+                tableAcademicPercentValue: "50%",
+                tableAvgDailyLabel: "Rata-rata Kegiatan per hari",
+                tableAvgDailyValue: "20.43 jam",
+                footerNote: "Belajar dari masa lalu, hiduplah untuk hari ini, dan biarkan dunia tahu siapa dirimu"
+            },
+            en: {
+                pageTitle: "Risti Nur Fadiyah's Biodata",
+                name: "Risti Nur Fadiyah",
+                studentStatus: "SMK Ma'arif NU Tirto Student",
+                bioTitle: "Personal Biodata",
+                bioNameLabel: "Name",
+                bioName: "Risti Nur Fadiyah",
+                bioDobLabel: "Place, date of birth",
+                bioDob: "Pekalongan, August 10, 2009",
+                bioAddressLabel: "Address",
+                bioAddress: "Babalan Kidul Village RT 04 RW 02, Bojong, Pekalongan",
+                bioGenderLabel: "Gender",
+                bioGender: "Female",
+                bioReligionLabel: "Religion",
+                bioReligion: "Islam",
+                bioNationalityLabel: "Nationality",
+                bioNationality: "Indonesian",
+                bioStatusLabel: "Status",
+                bioStatus: "Student",
+                bioEmailLabel: "Email",
+                bioPhoneLabel: "Phone Number",
+                educationTitle: "Education",
+                educationMI: "MI ALHUDA Babalan Kidul (2015-2021)",
+                educationSMP: "SMPN 1 Kedungwuni (2021-2024)",
+                educationSMK: "SMK Ma'arif NU Tirto (2024)",
+                skillsTitle: "Skills",
+                skillCanva: "Proficient in graphic design with Canva",
+                skillStressMngmt: "Emotional and Stress Management",
+                experienceTitle: "Life History / Experience",
+                expOsis: "Participated in SMK Student Council (OSIS)",
+                expStudytour: "Joined a study tour to Bandung in 8th grade",
+                achievementsTitle: "Achievements",
+                achieveMTQ: "1st Place in MTQ (tilawah) competition at the sub-district level, 2025",
+                achieveMI: "3rd Ranking in 4th Grade at MI",
+                dailyStatsTitle: "Daily Activity Statistics",
+                showDailyStatsBtn: "Show Activity Statistics",
+                dailyChartLabel: "Hours per Week",
+                dailyChartTitle: "Daily Activities per Week",
+                hobbyChartTitle: "Hobby Percentage",
+                hobbiesTitle: "Hobbies and Interests",
+                chartHobbyText: "Select a chart to see the percentage of hobbies:",
+                showHobbyPieBtn: "Show Hobby Pie Chart",
+                chartInterestText: "Select a chart to see the level of interest (scale 1-10):",
+                showInterestRadarBtn: "Show Interest Radar Chart",
+                mottoTitle: "Motto",
+                mottoText: "Happiness is found in the journey, not just at the destination",
+                futureHopesTitle: "Future Hopes",
+                futureHopesText: "May the future bring peace and happiness to all.",
+                futureHope: "I aspire to become a Doctor.",
+                summaryTitle: "Data Summary",
+                tableDescHeader: "Description",
+                tableValueHeader: "Value",
+                tablePopularHobbyLabel: "Popular Hobbies",
+                tablePopularHobbyValue: "Cooking (25%), Traveling (25%)",
+                tableHobbyModeLabel: "Hobby Mode",
+                tableHobbyModeValue: "Cooking and Traveling",
+                tableTotalAchieveLabel: "Total Achievements",
+                tableTotalAchieveValue: "2",
+                tableAcademicAchieveLabel: "Academic Achievements",
+                tableAcademicAchieveValue: "1",
+                tableAcademicPercentLabel: "Percentage of Academic Achievements",
+                tableAcademicPercentValue: "50%",
+                tableAvgDailyLabel: "Average Daily Activities",
+                tableAvgDailyValue: "20.43 hours",
+                footerNote: "Learn from the past, live for today, and let the world know who you are"
+            },
+            jv: {
+                pageTitle: "Biodata Risti Nur Fadiyah",
+                name: "Risti Nur Fadiyah",
+                studentStatus: "Siswi SMK Ma'arif NU Tirto",
+                bioTitle: "Biodata Diri",
+                bioNameLabel: "Jeneng",
+                bioName: "Risti Nur Fadiyah",
+                bioDobLabel: "Papan, tanggal lair",
+                bioDob: "Pekalongan, 10 Agustus 2009",
+                bioAddressLabel: "Alamat",
+                bioAddress: "Desa Babalan Kidul RT 04 RW 02, Bojong, Pekalongan",
+                bioGenderLabel: "Jenis Kelamin",
+                bioGender: "Wadon",
+                bioReligionLabel: "Agama",
+                bioReligion: "Islam",
+                bioNationalityLabel: "Kewarganegaraan",
+                bioNationality: "Indonesia",
+                bioStatusLabel: "Status",
+                bioStatus: "Siswa",
+                bioEmailLabel: "Email",
+                bioPhoneLabel: "Nomer Telepon",
+                educationTitle: "Pendidikan",
+                educationMI: "MI ALHUDA Babalan Kidul (2015-2021)",
+                educationSMP: "SMPN 1 Kedungwuni (2021-2024)",
+                educationSMK: "SMK Ma'arif NU Tirto (2024)",
+                skillsTitle: "Keterampilan",
+                skillCanva: "Duwe kemampuan ndesain grafis nganggo Canva",
+                skillStressMngmt: "Manajemen Emosi lan Stres",
+                experienceTitle: "Riwayat Urip / Pengalaman",
+                expOsis: "Melu Osis SMK",
+                expStudytour: "Melu study tour menyang Bandung nalika kelas 8",
+                achievementsTitle: "Prestasi",
+                achieveMTQ: "Juara 1 Lomba MTQ (tilawah) tingkat kecamatan, 2025",
+                achieveMI: "Peringkat 3 nalika MI Kelas 4",
+                dailyStatsTitle: "Statistik Kegiyatan Saben Dina",
+                showDailyStatsBtn: "Tuduhake Statistik Kegiyatan",
+                dailyChartLabel: "Jam saben Minggu",
+                dailyChartTitle: "Kegiyatan Saben Dina saben Minggu",
+                hobbyChartTitle: "Persentase Hobi",
+                hobbiesTitle: "Hobi lan Minat",
+                chartHobbyText: "Pilih diagram kanggo ndeleng persentase hobi:",
+                showHobbyPieBtn: "Tuduhake Diagram Hobi",
+                chartInterestText: "Pilih diagram kanggo ndeleng tingkat minat (skala 1-10):",
+                showInterestRadarBtn: "Tuduhake Tingkat Minat",
+                mottoTitle: "Moto",
+                mottoText: "Kesenangan ditemokake ing lelungan, ora mung ing tujuan",
+                futureHopesTitle: "Pangarep-arep Masa Depan",
+                futureHopesText: "Muga-muga masa depan nggawa katentreman lan kabahagiaan kanggo kabeh wong.",
+                futureHope: "Aku duwe cita-cita dadi Dokter.",
+                summaryTitle: "Ringkesan Data",
+                tableDescHeader: "Deskripsi",
+                tableValueHeader: "Nilai",
+                tablePopularHobbyLabel: "Hobi Populer",
+                tablePopularHobbyValue: "Masak (25%), Dolanan (25%)",
+                tableHobbyModeLabel: "Modus Hobi",
+                tableHobbyModeValue: "Masak lan Dolanan",
+                tableTotalAchieveLabel: "Total Prestasi",
+                tableTotalAchieveValue: "2",
+                tableAcademicAchieveLabel: "Prestasi Akademik",
+                tableAcademicAchieveValue: "1",
+                tableAcademicPercentLabel: "Persentase Prestasi Akademik",
+                tableAcademicPercentValue: "50%",
+                tableAvgDailyLabel: "Rata-rata Kegiatan saben dina",
+                tableAvgDailyValue: "20.43 jam",
+                footerNote: "Sinau saka masa lalu, urip kanggo dina iki, lan wenehi ngerti marang donya sapa awakmu"
+            },
+            ar: {
+                pageTitle: "سيرة ذاتية رستي نور فادية",
+                name: "رستي نور فادية",
+                studentStatus: "طالبة في مدرسة SMK Ma'arif NU Tirto",
+                bioTitle: "بيانات شخصية",
+                bioNameLabel: "الاسم",
+                bioName: "رستي نور فادية",
+                bioDobLabel: "مكان وتاريخ الميلاد",
+                bioDob: "بيكالونغان، 10 أغسطس 2009",
+                bioAddressLabel: "العنوان",
+                bioAddress: "قرية بابالان كيدول RT 04 RW 02، بوجونغ، بيكالونغان",
+                bioGenderLabel: "الجنس",
+                bioGender: "أنثى",
+                bioReligionLabel: "الديانة",
+                bioReligion: "الإسلام",
+                bioNationalityLabel: "الجنسية",
+                bioNationality: "إندونيسية",
+                bioStatusLabel: "الحالة",
+                bioStatus: "طالبة",
+                bioEmailLabel: "البريد الإلكتروني",
+                bioPhoneLabel: "رقم الهاتف",
+                educationTitle: "التعليم",
+                educationMI: "مدرسة MI ALHUDA بابالان كيدول (2015-2021)",
+                educationSMP: "مدرسة SMPN 1 Kedungwuni (2021-2024)",
+                educationSMK: "مدرسة SMK Ma'arif NU Tirto (2024)",
+                skillsTitle: "المهارات",
+                skillCanva: "لديها القدرة على التصميم الجرافيكي باستخدام Canva",
+                skillStressMngmt: "إدارة العواطف والإجهاد",
+                experienceTitle: "السيرة الذاتية / الخبرة",
+                expOsis: "شاركت في مجلس الطلاب بالمدرسة الثانوية المهنية",
+                expStudytour: "شاركت في رحلة دراسية إلى باندونغ في الصف الثامن",
+                achievementsTitle: "الإنجازات",
+                achieveMTQ: "المركز الأول في مسابقة تلاوة القرآن على مستوى المقاطعة، 2025",
+                achieveMI: "المركز الثالث في الصف الرابع بمدرسة MI",
+                dailyStatsTitle: "إحصاءات الأنشطة اليومية",
+                showDailyStatsBtn: "إظهار إحصاءات الأنشطة",
+                dailyChartLabel: "ساعة في الأسبوع",
+                dailyChartTitle: "الأنشطة اليومية في الأسبوع",
+                hobbyChartTitle: "نسبة الهوايات",
+                hobbiesTitle: "الهوايات والاهتمامات",
+                chartHobbyText: "اختر مخططًا لعرض نسبة الهوايات:",
+                showHobbyPieBtn: "إظهار مخطط الفطيرة للهوايات",
+                chartInterestText: "اختر مخططًا لعرض مستوى الاهتمام (مقياس 1-10):",
+                showInterestRadarBtn: "إظهار مخطط الرادار للاهتمامات",
+                mottoTitle: "الشعار",
+                mottoText: "السعادة توجد في الرحلة، وليس فقط في الوجهة",
+                futureHopesTitle: "آمال المستقبل",
+                futureHopesText: "آمل أن يجلب المستقبل السلام والسعادة للجميع.",
+                futureHope: "أطمح أن أصبح طبيبة.",
+                summaryTitle: "ملخص البيانات",
+                tableDescHeader: "الوصف",
+                tableValueHeader: "القيمة",
+                tablePopularHobbyLabel: "الهوايات الشائعة",
+                tablePopularHobbyValue: "الطبخ (25%)، السفر (25%)",
+                tableHobbyModeLabel: "وضع الهواية",
+                tableHobbyModeValue: "الطبخ والسفر",
+                tableTotalAchieveLabel: "إجمالي الإنجازات",
+                tableTotalAchieveValue: "2",
+                tableAcademicAchieveLabel: "الإنجازات الأكاديمية",
+                tableAcademicAchieveValue: "1",
+                tableAcademicPercentLabel: "نسبة الإنجازات الأكاديمية",
+                tableAcademicPercentValue: "50%",
+                tableAvgDailyLabel: "متوسط الأنشطة اليومية",
+                tableAvgDailyValue: "20.43 ساعة",
+                footerNote: "تعلم من الماضي، عش لليوم، ودع العالم يعرف من أنت"
+            },
+            ja: {
+                pageTitle: "ꦧꦶꦪꦺꦴꦢꦠꦫꦶꦱ꧀ꦠꦶꦤꦸꦂꦥꦢꦶꦪꦃ",
+                name: "ꦫꦶꦱ꧀ꦠꦶꦤꦸꦂꦥꦢꦶꦪꦃ",
+                studentStatus: "ꦱꦶꦱ꧀ꦮꦶꦱ꧀ꦩꦏ꧀ꦩ'ꦄꦫꦶꦥ꧀ꦤꦸꦠꦶꦂꦠ",
+                bioTitle: "ꦧꦶꦪꦺꦴꦢꦠꦢꦶꦫꦶ",
+                bioNameLabel: "ꦤꦩ",
+                bioName: "ꦫꦶꦱ꧀ꦠꦶꦤꦸꦂꦥꦢꦶꦪꦃ",
+                bioDobLabel: "ꦥꦥꦤ꧀꧈ꦠꦁꦒꦭ꧀ꦭꦻꦂ",
+                bioDob: "ꦥꦼꦏꦭꦺꦴꦔꦤ꧀꧈꧇꧑꧐꧇ꦲꦒꦸꦱ꧀ꦠꦸꦱ꧀꧇꧒꧐꧐꧙꧇",
+                bioAddressLabel: "ꦄꦭꦩꦠ꧀",
+                bioAddress: "ꦢꦺꦱꦧꦧꦭꦤ꧀ꦏꦶꦢꦸꦭ꧀ꦫꦠ꧀꧇꧐꧔꧇ꦫꦮ꧀꧇꧐꧒꧇꧈ꦧꦺꦴꦗꦺꦴꦁ꧈ꦥꦼꦏꦭꦺꦴꦔꦤ꧀",
+                bioGenderLabel: "ꦗꦼꦤꦶꦱ꧀ꦏꦼꦭꦩꦶꦤ꧀",
+                bioGender: "ꦮꦢꦺꦴꦤ꧀",
+                bioReligionLabel: "ꦄꦒꦩ",
+                bioReligion: "ꦆꦱ꧀ꦭꦩ꧀",
+                bioNationalityLabel: "ꦏꦺꦮꦂꦒꦤꦼꦒꦫꦄꦤ꧀",
+                bioNationality: "ꦆꦤ꧀ꦢꦺꦴꦤꦺꦱꦶꦪ",
+                bioStatusLabel: "ꦱ꧀ꦠꦠꦸꦱ꧀",
+                bioStatus: "ꦥꦼꦭꦗꦂ",
+                bioEmailLabel: "ꦌꦩꦲꦶꦭ꧀",
+                bioPhoneLabel: "ꦤꦺꦴꦩꦺꦂꦠꦼꦭꦺꦥꦺꦴꦤ꧀",
+                educationTitle: "ꦥꦼꦤ꧀ꦢꦶꦢꦶꦏꦤ꧀",
+                educationMI: "ꦩꦆꦄꦭ꧀ꦲꦸꦢꦧꦧꦭꦤ꧀ꦏꦶꦢꦸꦭ꧀ (2015-2021)",
+                educationSMP: "ꦱ꧀ꦩ꧀ꦥ꧀ꦤ꧀꧇꧑꧇ꦏꦼꦢꦸꦁꦮꦸꦤꦶ (2021-2024)",
+                educationSMK: "ꦱ꧀ꦩꦏ꧀ꦩ'ꦄꦫꦶꦥ꧀ꦤꦸꦠꦶꦂꦠ (2024)",
+                skillsTitle: "ꦏꦼꦠꦼꦫꦩ꧀ꦥꦶꦭꦤ꧀",
+                skillCanva: "ꦩꦼꦩꦶꦭꦶꦏꦶꦏꦼꦩꦩ꧀ꦥꦸꦮꦤ꧀ꦩꦼꦤ꧀ꦢꦼꦱꦻꦤ꧀ꦒꦿꦥ꦳ꦶꦱ꧀ꦢꦼꦤ꧀ꦒꦤ꧀ꦕꦤꦮ",
+                skillStressMngmt: "ꦩꦤꦗꦼꦩꦼꦤ꧀ꦌꦩꦺꦴꦱꦶꦭꦤ꧀ꦱ꧀ꦠꦿꦼꦱ꧀",
+                experienceTitle: "ꦫꦶꦮꦪꦠ꧀ꦲꦶꦢꦸꦥ꧀꧈ꦥꦼꦔꦭꦩꦤ꧀",
+                expOsis: "ꦩꦼꦭꦸꦎꦱꦶꦱ꧀ꦱ꧀ꦩꦏ꧀",
+                expStudytour: "ꦩꦼꦭꦸꦱ꧀ꦠꦸꦢꦶꦠꦸꦂꦩꦼꦚꦁꦧꦤ꧀ꦢꦸꦁꦤꦭꦶꦏꦏ꧀ꦭꦱ꧀꧇꧘꧇",
+                achievementsTitle: "ꦥꦿꦼꦱ꧀ꦠꦱꦶ",
+                achieveMTQ: "ꦗꦸꦮꦫ꧇꧑꧇ꦭꦺꦴꦩ꧀ꦧꦩꦠ꧀ꦕꦸ (ꦠꦶꦭꦮꦃ) ꦠꦶꦁꦏꦠ꧀ꦏꦼꦕꦩꦠꦤ꧀꧈꧇꧒꧐꧒꧕꧇",
+                achieveMI: "ꦥꦼꦫꦶꦁꦏꦠ꧀꧇꧓꧇ꦤꦭꦶꦏꦩꦆꦏ꧀ꦭꦱ꧀꧇꧔꧇",
+                dailyStatsTitle: "ꦱ꧀ꦠꦠꦶꦱ꧀ꦠꦶꦏ꧀ꦏꦼꦒꦶꦪꦠꦤ꧀ꦱꦼꦲꦫꦶꦲꦫꦶ",
+                showDailyStatsBtn: "ꦠꦩ꧀ꦥꦶꦭ꧀ꦏꦤ꧀ꦱ꧀ꦠꦠꦶꦱ꧀ꦠꦶꦏ꧀ꦏꦼꦒꦶꦪꦠꦤ꧀",
+                dailyChartLabel: "ꦗꦩ꧀ꦥꦼꦂꦩꦶꦁꦒꦸ",
+                dailyChartTitle: "ꦏꦼꦒꦶꦪꦠꦤ꧀ꦱꦼꦲꦫꦶꦲꦫꦶꦥꦼꦂꦩꦶꦁꦒꦸ",
+                hobbyChartTitle: "ꦥꦼꦂꦱꦼꦤ꧀ꦠꦱꦼꦲꦺꦴꦧꦶ",
+                hobbiesTitle: "ꦲꦺꦴꦧꦶꦭꦤ꧀ꦩꦶꦤꦠ꧀",
+                chartHobbyText: "ꦥꦶꦭꦶꦃꦢꦶꦪꦒꦿꦩ꧀ꦲꦸꦤ꧀ꦠꦸꦏ꧀ꦤꦢꦺꦭꦺꦁꦥꦼꦂꦱꦼꦤ꧀ꦠꦱꦼꦲꦺꦴꦧꦶ:",
+                showHobbyPieBtn: "ꦠꦩ꧀ꦥꦶꦭ꧀ꦏꦤ꧀ꦢꦶꦪꦒꦿꦩ꧀ꦲꦺꦴꦧꦶ",
+                chartInterestText: "ꦥꦶꦭꦶꦃꦢꦶꦪꦒꦿꦩ꧀ꦲꦸꦤ꧀ꦠꦸꦏ꧀ꦤꦢꦺꦭꦺꦁꦠꦶꦁꦏꦠ꧀ꦩꦶꦤꦠ꧀ (ꦱ꧀ꦏꦭ꧇꧑꧇-꧇꧑꧐꧇):",
+                showInterestRadarBtn: "ꦠꦩ꧀ꦥꦶꦭ꧀ꦏꦤ꧀ꦠꦶꦁꦏꦠ꧀ꦩꦶꦤꦠ꧀",
+                mottoTitle: "ꦩꦺꦴꦠꦺꦴ",
+                mottoText: "ꦏꦼꦧꦲꦒꦶꦪꦄꦤ꧀ꦢꦶꦠꦼꦩꦺꦴꦏꦏꦺꦲꦶꦁꦥꦼꦂꦗꦭꦤ꧀ꦤꦤ꧀꧈ꦲꦺꦴꦫꦩꦸꦁꦲꦶꦁꦠꦸꦗꦸꦮꦤ꧀",
+                futureHopesTitle: "ꦲꦫꦥꦤ꧀ꦩꦱꦢꦼꦥꦤ꧀",
+                futureHopesText: "ꦩꦸꦒꦲꦫꦥꦤ꧀ꦩꦱꦢꦼꦥꦤ꧀ꦔ꧀ꦒꦮꦏꦢꦩꦺꦪꦤ꧀ꦭꦤ꧀ꦏꦧꦲꦒꦶꦪꦄꦤ꧀ꦏꦁꦒꦺꦏꦧꦺꦃꦮꦺꦴꦁ꧉",
+                futureHope: "ꦱꦪꦧꦼꦂꦕꦶꦠꦕꦶꦠꦩꦼꦤ꧀ꦗꦢꦶꦱꦼꦎꦫꦁꦢꦺꦴꦏ꧀ꦠꦺꦂ꧉",
+                summaryTitle: "ꦫꦶꦁꦏꦱꦤ꧀ꦢꦠ",
+                tableDescHeader: "ꦢꦼꦱ꧀ꦏꦿꦶꦥ꧀ꦱꦶ",
+                tableValueHeader: "ꦤꦶꦭꦻ",
+                tablePopularHobbyLabel: "ꦲꦺꦴꦧꦶꦥꦺꦴꦥꦸꦭꦺꦂ",
+                tablePopularHobbyValue: "ꦩꦱꦏ꧀ (25%)꧈ꦗꦭꦤ꧀ꦗꦭꦤ꧀ (25%)",
+                tableHobbyModeLabel: "ꦩꦺꦴꦢꦸꦱ꧀ꦲꦺꦴꦧꦶ",
+                tableHobbyModeValue: "ꦩꦱꦏ꧀ꦭꦤ꧀ꦗꦭꦤ꧀ꦗꦭꦤ꧀",
+                tableTotalAchieveLabel: "ꦠꦺꦴꦠꦭ꧀ꦥꦿꦼꦱ꧀ꦠꦱꦶ",
+                tableTotalAchieveValue: "2",
+                tableAcademicAchieveLabel: "ꦥꦿꦼꦱ꧀ꦠꦱꦶꦄꦏꦢꦼꦩꦶꦏ꧀",
+                tableAcademicAchieveValue: "1",
+                tableAcademicPercentLabel: "ꦥꦼꦂꦱꦼꦤ꧀ꦠꦱꦼꦥꦿꦼꦱ꧀ꦠꦱꦶꦄꦏꦢꦼꦩꦶꦏ꧀",
+                tableAcademicPercentValue: "50%",
+                tableAvgDailyLabel: "ꦫꦠꦫꦠꦏꦼꦒꦶꦪꦠꦤ꧀ꦥꦼꦂꦲꦫꦶ",
+                tableAvgDailyValue: "20.43ꦗꦩ꧀",
+                footerNote: "ꦧꦼꦭꦗꦂꦢꦫꦶꦩꦱꦭꦭꦸ꧈ꦲꦶꦢꦸꦥ꧀ꦭꦃꦲꦸꦤ꧀ꦠꦸꦏ꧀ꦲꦫꦶꦲꦶꦤꦶ꧈ꦢꦤ꧀ꦧꦶꦪꦂꦏꦤ꧀ꦢꦸꦤꦶꦪꦠꦲꦸꦱꦶꦪꦥꦢꦶꦫꦶꦩꦸ"
+            }
+        };
+
+        // Data untuk grafik
+        const dailyActivityData = {
+            labels: ['Sekolah', 'Les', 'Tidur', 'Kegiatan Lain'],
+            datasets: [{
+                label: translations[document.documentElement.lang].dailyChartLabel,
+                data: [7, 2, 8, 3], // jam per hari
+                backgroundColor: [
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(255, 205, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderColor: [
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const hobbyData = {
+            labels: ['Memasak', 'Membaca', 'Jalan-jalan', 'Mendengarkan Musik'],
+            datasets: [{
+                label: 'Persentase Hobi',
+                data: [25, 20, 25, 30],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 206, 86)',
+                    'rgb(75, 192, 192)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const interestData = {
+            labels: ['Ilmu Pengetahuan', 'Seni & Budaya', 'Olahraga', 'Teknologi', 'Kesehatan'],
+            datasets: [{
+                label: 'Tingkat Minat',
+                data: [8, 7, 5, 9, 10], // skala 1-10
+                backgroundColor: 'rgba(179, 181, 198, 0.6)',
+                borderColor: 'rgba(179, 181, 198, 1)',
+                pointBackgroundColor: 'rgba(179, 181, 198, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(179, 181, 198, 1)'
+            }]
+        };
+
+        const dailyChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: translations[document.documentElement.lang].dailyChartTitle
+                }
+            }
+        };
+
+        const hobbyChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: translations[document.documentElement.lang].hobbyChartTitle
+                },
+                legend: {
+                    position: 'top',
+                },
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        let sum = 0;
+                        let dataArr = ctx.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value * 100 / sum).toFixed(0) + '%';
+                        return percentage;
+                    },
+                    color: '#fff',
+                    font: {
+                        weight: 'bold'
+                    }
+                }
+            }
+        };
+
+        const interestChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            elements: {
+                line: {
+                    borderWidth: 3
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Tingkat Minat'
+                },
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.raw;
+                            return label;
+                        }
+                    }
+                },
+                datalabels: {
+                    display: false // Sembunyikan datalabels pada radar chart
+                }
+            },
+            scales: {
+                r: {
+                    angleLines: {
+                        display: true
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 14
+                        }
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            }
+        };
+
+        // Fungsi untuk menginisialisasi chart
+        function createChart(id, type, data, options) {
+            const ctx = document.getElementById(id).getContext('2d');
+            return new Chart(ctx, {
+                type: type,
+                data: data,
+                options: options,
+                plugins: [ChartDataLabels]
+            });
+        }
+
+        // Fungsi untuk menampilkan/menyembunyikan chart
+        let dailyChart, hobbyChart, interestChart;
+        function toggleChart(containerId) {
+            const container = document.getElementById(containerId);
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+                if (containerId === 'dailyChartContainer' && !dailyChart) {
+                    dailyChart = createChart('dailyActivityChart', 'bar', dailyActivityData, dailyChartOptions);
+                } else if (containerId === 'hobbyChartContainer' && !hobbyChart) {
+                    hobbyChart = createChart('hobbyChart', 'pie', hobbyData, hobbyChartOptions);
+                } else if (containerId === 'interestChartContainer' && !interestChart) {
+                    interestChart = createChart('interestChart', 'radar', interestData, interestChartOptions);
+                }
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        // Fungsi untuk mengupdate konten berdasarkan bahasa
+        function updateContent(lang) {
+            document.documentElement.lang = lang;
+            const elements = document.querySelectorAll('[data-translate-key]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (el.tagName === 'TITLE') {
+                        document.title = translations[lang][key];
+                    } else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
+                
+                // Khusus untuk elemen dengan Aksara Jawa, tambahkan kelas aksara-jawa
+                if (lang === 'ja') {
+                    el.classList.add('aksara-jawa');
+                } else {
+                    el.classList.remove('aksara-jawa');
+                }
+            });
+
+            // Perbarui judul chart
+            if (dailyChart) {
+                dailyChart.options.plugins.title.text = translations[lang].dailyChartTitle;
+                dailyChart.update();
+            }
+            if (hobbyChart) {
+                hobbyChart.options.plugins.title.text = translations[lang].hobbyChartTitle;
+                hobbyChart.update();
+            }
+        }
+
+        // Event listener untuk language switcher
+        document.getElementById('lang-switcher').addEventListener('change', (event) => {
+            updateContent(event.target.value);
+        });
+
+        // Inisialisasi konten dengan bahasa default (ID)
+        document.addEventListener('DOMContentLoaded', () => {
+            updateContent('id');
+        });
+    </script>
+</body>
+</html>
